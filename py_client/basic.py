@@ -5,10 +5,6 @@ endpoint = "http://localhost:8000/api/"
 
 get_response = requests.get(
         endpoint,
-        params={"abc": 123},
-        json={
-            "query": "Hello man how are u :D"
-        }
     ) # HTTP REQUEST
 
 print(get_response.json()) # PRINT RAW TEXT RESPONSE
