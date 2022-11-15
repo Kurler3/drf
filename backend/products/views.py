@@ -14,7 +14,7 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     lookup_field = 'pk'
 
 # CREATE PRODUCT API VIEW
-class ProductCreateAPIView(generics.CreateAPIView):
+class ProductCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     
@@ -27,3 +27,29 @@ class ProductCreateAPIView(generics.CreateAPIView):
             content = title
         serializer.save(content=content)
         # return super().perform_create(serializer)
+        
+# LIST API VIEW
+class ProductListAPIView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    
+def product_alt_view(request, *args, **kwargs):
+    method = request.method
+    
+    if method == "GET": 
+        # GET REQUEST -> DETAIL VIEW OR LIST VIEW
+        pass
+        # GET URL ARGS
+
+        # IF PASSED PK, THEN RETURN DETAIL VIEW
+        
+        # ELSE RETURN LIST VIEW
+        
+    # IF POST METHOD
+    elif method == "POST":
+        # CREATE ITEM!!
+
+        # INIT SERIALIZER WITH REQUEST DATA
+        pass
+        
