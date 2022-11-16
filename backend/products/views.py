@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
@@ -50,6 +50,27 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
         
         if not instance.content:
             instance.content = instance.title
+
+    
+# MIXIN GENERIC VIEWS
+
+class ProductMixinView(
+    mixins.ListModelMixin,
+    generics.GenericAPIView
+):
+    
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+    # GET METHOD
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs) 
+
+    
+    # POST
+    
+    # CREATE
+    
     
 @api_view(['GET', 'POST'])
 def product_alt_view(request, pk = None, *args, **kwargs):

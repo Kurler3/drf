@@ -11,4 +11,7 @@ urlpatterns = [
     path('<int:pk>/delete/', views.ProductDeleteAPIView.as_view()),
     # UPDATE
     path('<int:pk>/update/', views.ProductUpdateAPIView.as_view()),
+    
+    # MIXIN
+    path('mixin/', views.ProductMixinView.as_view()),
 ]
