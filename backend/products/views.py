@@ -31,10 +31,25 @@ class ProductCreateAPIView(generics.ListCreateAPIView):
         serializer.save(content=content)
         # return super().perform_create(serializer)
         
-# LIST API VIEW
-class ProductListAPIView(generics.ListAPIView):
+# DELETE PRODUCT API VIEW
+class ProductDeleteAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    lookup_field = "pk"
+    
+# UPDATE PRODUCT API VIEW
+class ProductUpdateAPIView(generics.UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = "pk"
+    
+    # PERFORM UPDATE OVERRIDE 
+    def perform_update(self, serializer):
+        # GET THE INSTANCE
+        instance = serializer.save()
+        
+        if not instance.content:
+            instance.content = instance.title
     
 @api_view(['GET', 'POST'])
 def product_alt_view(request, pk = None, *args, **kwargs):
