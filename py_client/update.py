@@ -1,7 +1,7 @@
 import requests
  
  
-endpoint = "http://localhost:8000/api/products/3/update/"
+endpoint = "http://localhost:8000/api/products/5/update/"
 
 get_response = requests.put(
         endpoint,
